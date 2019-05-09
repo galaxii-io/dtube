@@ -51,7 +51,7 @@ Template.uploadform.parseTags = function (raw) {
   var videoTags = []
   var form = document.getElementsByClassName('uploadform')[0]
   if (FlowRouter.current().route.name == 'golive')
-    tags.push('dtv')
+    tags.push('gtv')
   else
     tags.push(Meteor.settings.public.beneficiary)
   for (var i = 0; i < raw.split(',').length; i++) {
@@ -170,7 +170,7 @@ Template.uploadformsubmit.events({
 
     // publish on blockchain !!
     $('#step3load').show()
-    
+
     var author = article.info.author
     var permlink = article.info.permlink
     var title = article.info.title

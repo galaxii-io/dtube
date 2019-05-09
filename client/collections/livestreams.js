@@ -76,17 +76,17 @@ Livestreams.getStreams = function(cb) {
 
 Livestreams.getStreamsByCreated = function(limit, cb) {
     var query = {
-      "tag": "dtv",
+      "tag": "gtv",
       "limit": Session.get('remoteSettings').loadLimit,
       "truncate_body": 1
     }
-  
+
     if (limit) query.limit = limit
     if (Session.get('oldestStream')) {
         query.start_author = Session.get('oldestStream').author
         query.start_permlink = Session.get('oldestStream').permlink
     }
-    
+
     steem.api.getDiscussionsByCreated(query, function(err, result) {
         Session.set('oldestStream', result[result.length-1])
         if (err === null || err === '') {
@@ -94,7 +94,7 @@ Livestreams.getStreamsByCreated = function(limit, cb) {
             var videos = []
             for (i = 0; i < len; i++) {
                 var video = Videos.parseFromChain(result[i])
-                if (video) videos.push(video) 
+                if (video) videos.push(video)
             }
             for (var i = 0; i < videos.length; i++) {
                 videos[i].source = 'chainByCreated'
@@ -115,17 +115,17 @@ Livestreams.getStreamsByCreated = function(limit, cb) {
 
 Livestreams.getStreamsByHot = function(limit, cb) {
     var query = {
-      "tag": "dtv",
+      "tag": "gtv",
       "limit": Session.get('remoteSettings').loadLimit,
       "truncate_body": 1
     }
-  
+
     if (limit) query.limit = limit
     if (Session.get('oldestHotStream')) {
         query.start_author = Session.get('oldestHotStream').author
         query.start_permlink = Session.get('oldestHotStream').permlink
     }
-    
+
     steem.api.getDiscussionsByHot(query, function(err, result) {
         Session.set('oldestHotStream', result[result.length-1])
         if (err === null || err === '') {
@@ -133,7 +133,7 @@ Livestreams.getStreamsByHot = function(limit, cb) {
             var videos = []
             for (i = 0; i < len; i++) {
                 var video = Videos.parseFromChain(result[i])
-                if (video) videos.push(video) 
+                if (video) videos.push(video)
             }
             for (var i = 0; i < videos.length; i++) {
                 videos[i].source = 'chainByHot'
