@@ -17,7 +17,8 @@ Meteor.settings.public = {
         "https://api.steem.house/"
       ],
       "snapMaxFileSizeKB": 4096,
-      "upldr": ["cluster"]
+      "upldr": ["cluster"],
+      "localhost": true
     },
     "app": "dtube/0.8",
     "beneficiary": "rahulsps",
