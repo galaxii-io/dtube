@@ -214,7 +214,10 @@ Template.upload.uploadImage = function (file, progressid, cb) {
       $(progressid).hide()
 
       refreshUploadSnapStatus = setInterval(function () {
-        var url = 'https://snap1.d.tube/getProgressByToken/' + result.token
+        var url = (Session.get('remoteSettings').localhost == true)
+          ? 'http://localhost:5000/getProgressByToken/' + result.token
+          : 'https://snap1.d.tube/getProgressByToken/' + result.token;
+
         $.getJSON(url, function (data) {
           var isCompleteUpload = true
           if (data.ipfsAddSource.progress !== "100.00%") {
