@@ -106,7 +106,7 @@ Template.uploadform.generateVideo = function (tags) {
     toastr.error(translate('UPLOAD_ERROR_TITLE_TOO_LONG'), translate('ERROR_TITLE'))
     return
   }
-  if (!article.info.snaphash && 1==0) {
+  if (!article.info.snaphash && 1==1) {
     toastr.error(translate('UPLOAD_ERROR_UPLOAD_SNAP_FILE'), translate('ERROR_TITLE'))
     return
   }
@@ -114,7 +114,7 @@ Template.uploadform.generateVideo = function (tags) {
     toastr.error(translate('UPLOAD_ERROR_LOGIN_BEFORE_UPLOADING'), translate('ERROR_TITLE'))
     return
   }
-  if (!article.content.videohash && 1==0) {
+  if (!article.content.videohash && 1==1) {
     toastr.error(translate('UPLOAD_ERROR_UPLOAD_VIDEO_BEFORE_SUBMITTING'), translate('ERROR_TITLE'))
     return
   }

@@ -141,7 +141,7 @@ Videos.setLastBlog = function(channel, item) {
   var lastBlogs = Session.get('lastBlogs')
   lastBlogs[channel] = item
   Session.set('lastBlogs', lastBlogs)
-} 
+}
 
 Videos.getVideosByBlog = function(author, limit, cb) {
   var query = {
@@ -184,8 +184,9 @@ Videos.getVideosByBlog = function(author, limit, cb) {
 }
 
 Videos.getVideosBy = function(type, limit, cb) {
+  //"dtube",
   var query = {
-    "tag": "dtube",
+    "tag": "rahulsps",
     "limit": Session.get('remoteSettings').loadLimit,
     "truncate_body": 1
   }
@@ -267,7 +268,7 @@ Videos.getVideosBy = function(type, limit, cb) {
               var videos = []
               for (i = 0; i < len; i++) {
                   var video = Videos.parseFromChain(result[i])
-                  if (video) videos.push(video) 
+                  if (video) videos.push(video)
               }
               for (var i = 0; i < videos.length; i++) {
                 videos[i].source = 'chainByCreated'
@@ -293,7 +294,7 @@ Videos.getVideosBy = function(type, limit, cb) {
               var videos = []
               for (i = 0; i < len; i++) {
                   var video = Videos.parseFromChain(result[i])
-                  if (video) videos.push(video) 
+                  if (video) videos.push(video)
               }
               for (var i = 0; i < videos.length; i++) {
                 videos[i].source = 'chainByCreated'
@@ -364,7 +365,7 @@ Videos.parseFromChain = function(video, isComment) {
   newVideo.created = video.created
   newVideo.net_rshares = video.net_rshares
   newVideo.reblogged_by = video.reblogged_by
-  
+
   // xss attack fix
   if (newVideo.content && newVideo.content.tags) {
     var xssTags = []

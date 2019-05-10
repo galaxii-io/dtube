@@ -10,11 +10,11 @@ import AskSteem from 'asksteem';
 import sc2sdk from 'sc2-sdk';
 steem.api.setOptions({ url: 'https://api.steemit.com' });
 
-console.log('Starting DTube APP')
+console.log('Starting Galaxii APP')
 
 FlowRouter.wait();
 Meteor.startup(function(){
-  console.log('DTube APP Started')
+  console.log('Galaxii APP Started')
   Session.set('remoteSettings', Meteor.settings.public.remote)
   window.steem = steem
   // window.Gun = Gun

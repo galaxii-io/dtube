@@ -226,8 +226,8 @@ Template.upload.uploadImage = function (file, progressid, cb) {
           if (data.ipfsAddOverlay.progress !== "100.00%") {
             isCompleteUpload = false;
           }
-          // if (isCompleteUpload) {
-          if (1==1) {
+          if (isCompleteUpload) {
+          // if (1==1) {
             clearInterval(refreshUploadSnapStatus)
             $('input[name="snaphash"]').val(data.ipfsAddSource.hash)
             Session.set('overlayHash', data.ipfsAddOverlay.hash)
