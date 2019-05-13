@@ -4,7 +4,7 @@
     <div style="height:100%px;">
       <a href='/v/{{author}}/{{permlink}}' title='{{title}}'>
         <div class='verticalvideosnapsnap' style="height:118px;width:210px;">
-          {{#if meta.video.info.duration}} 
+          {{#if meta.video.info.duration}}
             <span class="videosnapduration">{{durationDisplay meta.video.info.duration}}</span>
           {{/if}}
           <div id="snapload" class="ui active dimmer pos-abs" style="z-index:-1;background-color: rgba(167, 167, 167, 0.85);
@@ -63,22 +63,22 @@
       </div>
       {{#if meta.video.content.tags}}
         <div id='videosnaptags' class='videosnaptags' style="padding-top:5px;">
-            {{#each meta.video.content.tags}} 
-            {{#unless equals this 'dtube'}} 
-              {{#if this}} 
+            {{#each meta.video.content.tags}}
+            {{#unless equals this 'rahulsps'}}
+              {{#if this}}
                 <a href="/t/{{this}}" class="ui tiny label">{{convertTag this}}</a>
-              {{/if}} 
-            {{/unless}} 
+              {{/if}}
+            {{/unless}}
             {{/each}}
           </div>
         {{else}}
         <div id='videosnaptags' class='videosnaptags' style="padding-top:5px;">
-            {{#each content.tags}} 
-            {{#unless equals this 'dtube'}} 
-              {{#if this}} 
+            {{#each content.tags}}
+            {{#unless equals this 'rahulsps'}} 
+              {{#if this}}
                 <a href="/t/{{this}}" class="ui tiny label">{{convertTag this}}</a>
-              {{/if}} 
-            {{/unless}} 
+              {{/if}}
+            {{/unless}}
             {{/each}}
           </div>
         {{/if}}

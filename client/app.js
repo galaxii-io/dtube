@@ -18,7 +18,7 @@ Meteor.startup(function(){
   Session.set('remoteSettings', Meteor.settings.public.remote)
   window.steem = steem
   // window.Gun = Gun
-
+  Session.set('LIVE_SITE', "http://192.168.0.124:3000")
   Session.set('lastHot', null)
   Session.set('lastTrending', null)
   Session.set('lastCreated', null)
@@ -48,7 +48,7 @@ Meteor.startup(function(){
   if (window.location.hostname == 'localhost' && window.location.port == '3000')
     cbUrl = 'http://localhost:3000/#!/sc2login'
   else
-    cbUrl = 'https://d.tube/#!/sc2login'
+    cbUrl = Session.get("LIVE_SITE")+'/#!/sc2login'
   var sc2 = sc2sdk.Initialize({
     app: 'dtube.app',
     callbackURL: cbUrl,

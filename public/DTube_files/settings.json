@@ -4,18 +4,16 @@
       "loadLimit": 12,
       "displayNodes": [
         "https://snap1.d.tube",
-        "https://ipfs.io",
-        // "https://ipfs.infura.io",
-        // "http://127.0.0.1:8080"
+        "https://ipfs.io"
       ],
       "snapMaxFileSizeKB": 1024,
       "upldr": ["upldr1", "upldr3", "upldr5", "upldrg1", "upldrg5", "cluster"],
       "localhost": false
     },
     "app": "dtube/0.7",
-    "beneficiary": "dtube",
+    "beneficiary": "rahulsps",
     "pageTitleSeparator": "-",
-    "appName": "DTube",
+    "appName": "Galaxii",
     "ipfs": "",
     "lang": {
       "bn": {"name": "বাংলা", "path": "bn/bn-BD.json"},
@@ -40,4 +38,3 @@
       "tr": {"name": "Türkçe", "path": "tr/tr-TR.json"}
     }
   }
-  

@@ -17,7 +17,7 @@
       <div class="item copylink">
         <span class="customlink">
           <i class="share icon"></i>{{ translate 'VIDEO_SETTINGS_COPY_PERMA_LINK'}}</span>
-        <input id="permalink" style="width:0px;visibility:hidden;" type="text" placeholder="Permalink" value="https://d.tube/v/{{info.author}}/{{info.permlink}}" readonly>
+        <input id="permalink" style="width:0px;visibility:hidden;" type="text" placeholder="Permalink" value="/v/{{info.author}}/{{info.permlink}}" readonly>
         <!--<div class="ui button copy" style="width:130px;">{{ translate 'VIDEO_COPY_PERMA_LINK'}} </div>   -->
       </div>
       <div  class="item copyembed">
@@ -29,7 +29,7 @@
       {{#if content.magnet}}
       <div class="item">
         <a href="{{content.magnet}}">
-          <span class="customlink"> 
+          <span class="customlink">
             <i class="magnet icon"></i> {{ translate 'VIDEO_SETTINGS_DOWNLOAD_FROM_MAGNET'}}</span>
         </a>
       </div>
@@ -41,7 +41,7 @@
               <i class="plus icon"></i>{{ translate 'VIDEO_SETTINGS_ADD_TO_WATCH_LATER'}}</span>
           </a>
         </div>
-      {{/unless}} 
+      {{/unless}}
     </div>
   </div>
 </template>

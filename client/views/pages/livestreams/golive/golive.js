@@ -6,11 +6,11 @@ Template.upload.rendered = function () {
 
 Template.golive.genBody = function (author, permlink, title, snaphash, videohash, description) {
   var body = '<center>'
-  body += '<a href=\'https://d.tube/#!/v/' + author + '/' + permlink + '\'>'
+  body += '<a href=\'/#!/v/' + author + '/' + permlink + '\'>'
   body += '<img src=\'https://ipfs.io/ipfs/' + Session.get('overlayHash') + '\'></a></center><hr>\n\n'
   body += description
   body += '\n\n<hr>'
-  body += '<a href=\'https://d.tube/#!/v/' + author + '/' + permlink + '\'> ▶️ DTube</a><br />'
+  //body += '<a href=\'/#!/v/' + author + '/' + permlink + '\'> ▶️ DTube</a><br />'
   body += '<a href=\'https://ipfs.io/ipfs/' + videohash + '\'> ▶️ IPFS</a>'
   return body
 }
@@ -50,7 +50,7 @@ Template.golive.events({
     $('#getStreamKey > i').css('background', 'transparent')
     Livestreams.getStreamKey(function(err, res) {
         if (err) console.log(err)
-        else { 
+        else {
           Session.set('streamKey', res)
           $('#getStreamKey').removeClass('disabled')
           $('#getStreamKey > i').addClass('checkmark green')

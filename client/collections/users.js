@@ -45,7 +45,7 @@ Users.refreshLocalUsers = function(cb) {
       Subs.loadFollowing(results[i].username, undefined, true, function(follower) {
         var sub = Subs.findOne({following: Meteor.settings.public.beneficiary, follower: follower})
         if (!sub) Subs.followUs(follower, function(follower){
-          console.log('Subs loaded & Subscribed to dtube')
+          console.log('Subs loaded & Subscribed to Galaxii')
         })
         else console.log('Subs loaded')
       })
