@@ -4,8 +4,7 @@ Meteor.settings.public = {
       "dfees": 2500,
       "loadLimit": 12,
       "displayNodes": [
-        "https://snap1.d.tube",
-        "http://127.0.0.1:8080"
+        "http://localhost:5000"
       ],
       "APINodes": [
         "https://api.steemit.com/",
@@ -18,7 +17,7 @@ Meteor.settings.public = {
       ],
       "snapMaxFileSizeKB": 4096,
       "upldr": ["cluster"],
-      "localhost": true
+      "localhost": false
     },
     "app": "dtube/0.8",
     "beneficiary": "rahulsps",

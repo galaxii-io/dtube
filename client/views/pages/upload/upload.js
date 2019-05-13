@@ -82,7 +82,8 @@ Template.upload.setBestUploadEndpoint = function (cb) {
 var getUploaderStatus = function (upldr) {
   var url = (Session.get('remoteSettings').localhost == true)
     ? 'http://localhost:5000/getStatus'
-    : 'https://'+upldr+'.d.tube/getStatus'
+    : 'http://localhost:5000/getStatus';
+    // : 'https://'+upldr+'.d.tube/getStatus';
   return new Promise(function (resolve, reject) {
     var req = new XMLHttpRequest();
     req.open('get', url, true);
@@ -123,12 +124,13 @@ Template.upload.genBodyLivestream = function (author, permlink, title, snaphash,
 Template.upload.uploadVideo = function (file, progressid, cb) {
   var postUrl = (Session.get('remoteSettings').localhost == true)
     ? 'http://localhost:5000/uploadVideo?videoEncodingFormats=240p,480p,720p,1080p&sprite=true'
-    : 'https://'+Session.get('upldr')+'.d.tube/uploadVideo?videoEncodingFormats=240p,480p,720p,1080p&sprite=true'
+    : 'http://localhost:5000/uploadVideo?videoEncodingFormats=240p,480p,720p,1080p&sprite=true';
+    // : 'https://'+Session.get('upldr')+'.d.tube/uploadVideo?videoEncodingFormats=240p,480p,720p,1080p&sprite=true';
   var formData = new FormData();
   formData.append('files', file);
   $(progressid).progress({ value: 0, total: 1 })
   $(progressid).show();
-  var credentials = Session.get('upldr') == 'cluster' ? true : false
+  var credentials = false; //Session.get('upldr') == 'cluster' ? true : false
   $.ajax({
     cache: false,
     contentType: false,
@@ -178,7 +180,8 @@ Template.upload.uploadImage = function (file, progressid, cb) {
   $('#uploadSnap > i').css('background', 'transparent')
   var postUrl = (Session.get('remoteSettings').localhost == true)
     ? 'http://localhost:5000/uploadImage'
-    : 'https://snap1.d.tube/uploadImage'
+    : 'http://localhost:5000/uploadImage';
+    // : 'https://snap1.d.tube/uploadImage';
   var formData = new FormData();
   formData.append('files', file);
   $(progressid).progress({ value: 0, total: 1 })
@@ -210,7 +213,8 @@ Template.upload.uploadImage = function (file, progressid, cb) {
       refreshUploadSnapStatus = setInterval(function () {
         var url = (Session.get('remoteSettings').localhost == true)
           ? 'http://localhost:5000/getProgressByToken/' + result.token
-          : 'https://snap1.d.tube/getProgressByToken/' + result.token;
+          : 'http://localhost:5000/getProgressByToken/' + result.token
+          // : 'https://snap1.d.tube/getProgressByToken/' + result.token;
 
         $.getJSON(url, function (data) {
           var isCompleteUpload = true

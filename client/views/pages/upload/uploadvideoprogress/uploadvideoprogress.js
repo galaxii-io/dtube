@@ -11,7 +11,8 @@ Template.uploadvideoprogress.update = function() {
   var token = Session.get('uploadToken')
   var url = (Session.get('remoteSettings').localhost == true)
     ? 'http://localhost:5000/getProgressByToken/'+token
-    : 'https://'+Session.get('upldr')+'.d.tube/getProgressByToken/'+token
+    : 'http://localhost:5000/getProgressByToken/'+token;
+    // : 'https://'+Session.get('upldr')+'.d.tube/getProgressByToken/'+token;
   var credentials = Session.get('upldr') == 'cluster' ? true : false
   $.ajax({
     cache: false,
@@ -20,14 +21,14 @@ Template.uploadvideoprogress.update = function() {
     url: url,
     type: 'GET',
     xhrFields: {
-      withCredentials: credentials
+      withCredentials: false //credentials
     },
     success: function(data) {
       console.log(data)
       Session.set('uploadVideoProgress', data)
 
       // if upload is finished, we stop updating the progress
-      
+
       var isCompleteUpload = true
       if (typeof data.finished === 'boolean' && data.finished === false) {
         isCompleteUpload = false
@@ -46,13 +47,13 @@ Template.uploadvideoprogress.update = function() {
           isCompleteUpload = false;
         }
       }
-  
+
       if (isCompleteUpload) {
         clearInterval(refreshUploadStatus)
-  
+
         if (data.ipfsAddSourceVideo)
           $('input[name="videohash"]').val(data.ipfsAddSourceVideo.hash)
-  
+
         if (data.encodedVideos) {
           for (let i = 0; i < data.encodedVideos.length; i++) {
             switch(data.encodedVideos[i].ipfsAddEncodeVideo.encodeSize || data.encodedVideos[i].encode.encodeSize) {
@@ -71,11 +72,11 @@ Template.uploadvideoprogress.update = function() {
             }
           }
         }
-        
-  
+
+
         if (data.sprite)
           $('input[name="spritehash"]').val(data.sprite.ipfsAddSprite.hash)
-  
+
         Session.set('uploadVideoProgress', null)
         $('#step1load').parent().addClass('completed')
       }
