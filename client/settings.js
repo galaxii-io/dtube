@@ -18,7 +18,7 @@ Meteor.settings.public = {
       ],
       "snapMaxFileSizeKB": 4096,
       "upldr": ["cluster"],
-      "localhost": true
+      "localhost": false
     },
     "app": "dtube/0.8",
     "beneficiary": "rahulsps",

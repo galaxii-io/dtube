@@ -29,7 +29,7 @@ window.loadJsonTranslate = function(culture, cb = function(){}){
   UserSettings.set('language', culture)
   var url = Session.get("LIVE_SITE")+'/DTube_files/lang/'+Meteor.settings.public.lang[culture].path
   if (window.location.hostname == 'localhost' && window.location.port == '3000')
-  url = url.replace(Session.get("LIVE_SITE")+'', 'http://localhost:3000')
+  url = url.replace(Session.get("LIVE_SITE"), 'http://localhost:3000')
   $.get(url, function(json, result) {
     if (result == 'success') {
       Session.set('jsonTranslate', json)
