@@ -53,8 +53,7 @@ Meteor.startup(function(){
   var sc2 = sc2sdk.Initialize({
     app: 'vershasps',
     callbackURL: cbUrl,
-    accessToken: 'access_token',
-    scope: ['vote','comment','claim_reward_balance','custom_json','comment_options']
+    accessToken: 'access_token'
   });
   window.sc2 = sc2
 

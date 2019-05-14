@@ -271,6 +271,9 @@ Template.registerHelper('humanFilesize', function (bits, si) {
 
 Template.registerHelper('ipfsSrc', function (ipfsHash) {
   if (!ipfsHash) return ''
+
+  return 'https://ipfs.io/ipfs/'+ ipfsHash
+
   if (Session.get('ipfsGateway') == 'automatic') {
     var n = Session.get('remoteSettings').displayNodes.length - 1
     var i = ipfsHash.charCodeAt(ipfsHash.length - 1) % n
