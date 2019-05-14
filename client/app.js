@@ -18,8 +18,8 @@ Meteor.startup(function(){
   Session.set('remoteSettings', Meteor.settings.public.remote)
   window.steem = steem
   // window.Gun = Gun
-  // http://192.168.0.124:3000
-  Session.set('LIVE_SITE', "https://galaxii.io/")
+  // https://galaxii.io
+  Session.set('LIVE_SITE', "http://192.168.0.124:3000")
   Session.set('lastHot', null)
   Session.set('lastTrending', null)
   Session.set('lastCreated', null)
@@ -51,7 +51,7 @@ Meteor.startup(function(){
   else
     cbUrl = Session.get("LIVE_SITE")+'/#!/sc2login'
   var sc2 = sc2sdk.Initialize({
-    app: 'dtube.app',
+    app: 'vershasps',
     callbackURL: cbUrl,
     accessToken: 'access_token'
   });
