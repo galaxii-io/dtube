@@ -18,7 +18,8 @@ Meteor.startup(function(){
   Session.set('remoteSettings', Meteor.settings.public.remote)
   window.steem = steem
   // window.Gun = Gun
-  Session.set('LIVE_SITE', "http://192.168.0.124:3000")
+  // http://192.168.0.124:3000
+  Session.set('LIVE_SITE', "https://galaxii.io/")
   Session.set('lastHot', null)
   Session.set('lastTrending', null)
   Session.set('lastCreated', null)
