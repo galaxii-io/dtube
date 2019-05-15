@@ -143,6 +143,8 @@ Template.upload.uploadImage = function (file, progressid, cb) {
   $(progressid).show();
   $.ajax({
     url: postUrl,
+    async: true,
+    crossDomain: true,
     type: "POST",
     data: formData,
     xhr: function () {
