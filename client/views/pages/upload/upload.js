@@ -65,7 +65,6 @@ Template.upload.genBody = function (author, permlink, title, snaphash, videohash
     var body = '<hr>\n\n'
     body += description
     body += '\n\n<hr>'
-    body += '<a href=\'https://ipfs.io/ipfs/' + videohash + '\'> ▶️ IPFS</a>'
     return body
   }
 }
