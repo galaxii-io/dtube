@@ -4,7 +4,7 @@
         <a class="ui mini circular avatar image" style="margin-right:10px;width:48px;height:48px;">
           <div style="background-size: cover; min-width:48px; width:48px; height: 48px; background-image:url({{userPic author 'small'}})"></div>
         </a>
-        {{#if equals author currentAuthor}} 
+        {{#if equals author currentAuthor}}
           <a href='/c/{{author}}' class="ui author owner">{{author}}</a>
         {{else}}
           <a href='/c/{{author}}' class="ui author">{{author}}</a>
@@ -14,7 +14,7 @@
           <span class="money">${{displayPayout pending_payout_value total_payout_value curator_payout_value}}</span>
         </div>
         <div class="text" style="word-wrap: normal;flex-wrap: wrap;overflow: hidden; margin-top: 10px;">
-          {{{syntaxed body}}}
+          {{syntaxed body}}
         </div>
         <div class="actions noselect">
           {{#if hasUpvoted this}}
@@ -30,7 +30,9 @@
             <a class="downvoteComment" data-author='{{author}}' data-permlink='{{permlink}}'>
             <i class="thumbs down icon"></i> {{downvotes active_votes}}</a>
           {{/if}}
-          <a class="replyTo ui blue" data-author='{{author}}' data-permlink='{{permlink}}'>{{ translate 'GLOBAL_REPLY'}}</a>
+          <a class="replyTo ui blue" data-author='{{author}}' data-permlink='{{permlink}}'>
+            {{ translate 'GLOBAL_REPLY'}}
+          </a>
         </div>
     </div>
     {{#if isReplying this}}
@@ -45,7 +47,7 @@
             <div style="display:inline-block;padding: 0.8em 1em;">{{ translate 'VIDEO_ADD_COMMENT'}}</div>
         </div>
       </form>
-    {{/if}} 
+    {{/if}}
     {{#if comments.length}}
       <i class="ui angle down icon center"></i>
       <button id="showreplies" class="ui labeled button commentbutton" style="margin-top:10px;">
@@ -57,12 +59,12 @@
       </button>
     {{/if}}
   </div>
-  
-  {{#if comments.length}} 
-    <div class="content comment" style="margin-top:20px"> 
-      {{#with comments}} 
-        {{> subcomments}} 
-      {{/with}} 
+
+  {{#if comments.length}}
+    <div class="content comment" style="margin-top:20px">
+      {{#with comments}}
+        {{> subcomments}}
+      {{/with}}
     </div>
   {{/if}}
 </template>
