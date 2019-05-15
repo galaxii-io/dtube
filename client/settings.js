@@ -16,7 +16,7 @@ Meteor.settings.public = {
         "https://api.steem.house/"
       ],
       "snapMaxFileSizeKB": 4096,
-      "full_upldr": "htpp://galaxii.io:5000",
+      "full_upldr": "https://upload1.galaxii.io",
       "localhost": false
     },
     "app": "dtube/0.8",
