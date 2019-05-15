@@ -6,7 +6,7 @@ Template.activity.helpers({
     getSnap: function (author, permlink) {
         var video = Videos.findOne({ 'info.author': author, 'info.permlink': permlink })
         if (video)
-            return "https://ipfs.io/ipfs/" + video.info.snaphash;
+            return Session.get('remoteSettings').displayNodes[0]+"/ipfs/" + video.info.snaphash;
     },
     user: function () {
         return {
@@ -22,7 +22,7 @@ Template.activity.events({
     }
   })
 
-  
+
 Template.activity.rendered = function(){
     Template.settingsdropdown.nightMode();
   }

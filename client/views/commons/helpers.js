@@ -271,17 +271,7 @@ Template.registerHelper('humanFilesize', function (bits, si) {
 
 Template.registerHelper('ipfsSrc', function (ipfsHash) {
   if (!ipfsHash) return ''
-
-  return Session.get('remoteSettings').displayNodes[0]='/ipfs/'+ ipfsHash
-
-  // if (Session.get('ipfsGateway') == 'automatic') {
-  //   var n = Session.get('remoteSettings').displayNodes.length - 1
-  //   var i = ipfsHash.charCodeAt(ipfsHash.length - 1) % n
-  //   return Session.get('remoteSettings').displayNodes[i] + '/ipfs/' + ipfsHash
-  // } else {
-  //   return Session.get('ipfsGateway') + '/ipfs/' + ipfsHash
-  // }
-
+  return Session.get('remoteSettings').displayNodes[0]+'/ipfs/'+ ipfsHash
 })
 
 Template.registerHelper('isSubscribedTo', function (following) {
