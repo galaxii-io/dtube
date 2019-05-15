@@ -4,7 +4,7 @@ Meteor.settings.public = {
       "dfees": 2500,
       "loadLimit": 12,
       "displayNodes": [
-        "http://localhost:5000"
+        "http://galaxii.io:8080"
       ],
       "APINodes": [
         "https://api.steemit.com/",
@@ -16,7 +16,7 @@ Meteor.settings.public = {
         "https://api.steem.house/"
       ],
       "snapMaxFileSizeKB": 4096,
-      "upldr": ["cluster"],
+      "full_upldr": "htpp://galaxii.io:5000",
       "localhost": false
     },
     "app": "dtube/0.8",
