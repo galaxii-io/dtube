@@ -11,9 +11,8 @@ Template.uploadvideoprogress.update = function() {
   var token = Session.get('uploadToken')
   var url = (Session.get('remoteSettings').localhost == true)
     ? 'http://localhost:5000/getProgressByToken/'+token
-    : 'http://localhost:5000/getProgressByToken/'+token;
-    // : 'https://'+Session.get('upldr')+'.d.tube/getProgressByToken/'+token;
-  var credentials = Session.get('upldr') == 'cluster' ? true : false
+    : Session.get('upldr')+'/getProgressByToken/'+token;
+
   $.ajax({
     cache: false,
     contentType: false,
@@ -21,7 +20,7 @@ Template.uploadvideoprogress.update = function() {
     url: url,
     type: 'GET',
     xhrFields: {
-      withCredentials: false //credentials
+      withCredentials: false
     },
     success: function(data) {
       console.log(data)

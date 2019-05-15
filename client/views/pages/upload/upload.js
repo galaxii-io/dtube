@@ -32,58 +32,14 @@ function shuffleArray(array) {
 Template.upload.setBestUploadEndpoint = function (cb) {
   if (Session.get('remoteSettings').localhost == true) {cb(); return}
   if (Session.get('upldr')) {cb();return}
-  var uploaders = Session.get('remoteSettings').upldr
-  shuffleArray(uploaders)
-  console.log(uploaders)
-  var results = []
-  var queuethreshold = 3;
-  var finished = false;
-  for (let i = 0; i < uploaders.length; i++) {
-    getUploaderStatus(uploaders[i]).then(function (response) {
-      var upldr = response.upldr
-      var totalQueueSize = 0;
-      if (response.version == '0.6.6' || response.currentWaitingInQueue.version) {
-        totalQueueSize += response.currentWaitingInQueue.ipfsToAddInQueue
-        totalQueueSize += response.currentWaitingInQueue.spriteToCreateInQueue
-        totalQueueSize += response.currentWaitingInQueue.videoToEncodeInQueue
-      } else {
-        totalQueueSize += response.currentWaitingInQueue.audioCpuToEncode
-        totalQueueSize += response.currentWaitingInQueue.videoGpuToEncode
-        totalQueueSize += response.currentWaitingInQueue.audioVideoCpuToEncode
-        totalQueueSize += response.currentWaitingInQueue.spriteToCreate
-        totalQueueSize += response.currentWaitingInQueue.ipfsToAdd
-      }
-
-      results.push({
-        upldr: upldr,
-        totalQueueSize: totalQueueSize
-      })
-
-      if (totalQueueSize < queuethreshold && !finished) {
-        Session.set('upldr', upldr)
-        console.log('upldr' + upldr + ' ' + ' ---  totalQueueSize: ' + totalQueueSize)
-        finished = true
-        cb()
-      } else if (results.length == uploaders.length && !finished) {
-        var bestEndpoint = results.sort(function (a, b) {
-          return a.totalQueueSize - b.totalQueueSize
-        })[0]
-        Session.set('upldr', bestEndpoint.upldr)
-        console.log('upldr' + bestEndpoint.upldr + ' ' + ' ---  totalQueueSize: ' + bestEndpoint.totalQueueSize)
-        finished = true
-        cb()
-      }
-    }, function (upldr) {
-      results.push({ upldr: upldr, error: true })
-    });
-  }
+  Session.set('upldr', Session.get('remoteSettings').full_upldr);
+  cb(); return
 }
 
 var getUploaderStatus = function (upldr) {
   var url = (Session.get('remoteSettings').localhost == true)
     ? 'http://localhost:5000/getStatus'
-    : 'http://localhost:5000/getStatus';
-    // : 'https://'+upldr+'.d.tube/getStatus';
+    : Session.get('upldr')+'/getStatus';
   return new Promise(function (resolve, reject) {
     var req = new XMLHttpRequest();
     req.open('get', url, true);
@@ -124,13 +80,12 @@ Template.upload.genBodyLivestream = function (author, permlink, title, snaphash,
 Template.upload.uploadVideo = function (file, progressid, cb) {
   var postUrl = (Session.get('remoteSettings').localhost == true)
     ? 'http://localhost:5000/uploadVideo?videoEncodingFormats=240p,480p,720p,1080p&sprite=true'
-    : 'http://localhost:5000/uploadVideo?videoEncodingFormats=240p,480p,720p,1080p&sprite=true';
-    // : 'https://'+Session.get('upldr')+'.d.tube/uploadVideo?videoEncodingFormats=240p,480p,720p,1080p&sprite=true';
+    : Session.get('upldr')+'/uploadVideo?videoEncodingFormats=240p,480p,720p,1080p&sprite=true';
   var formData = new FormData();
   formData.append('files', file);
   $(progressid).progress({ value: 0, total: 1 })
   $(progressid).show();
-  var credentials = false; //Session.get('upldr') == 'cluster' ? true : false
+
   $.ajax({
     cache: false,
     contentType: false,
@@ -139,7 +94,7 @@ Template.upload.uploadVideo = function (file, progressid, cb) {
     type: "POST",
     url: postUrl,
     xhrFields: {
-      withCredentials: credentials
+      withCredentials: false
     },
     xhr: function () {
       // listen for progress events on the upload
@@ -180,8 +135,8 @@ Template.upload.uploadImage = function (file, progressid, cb) {
   $('#uploadSnap > i').css('background', 'transparent')
   var postUrl = (Session.get('remoteSettings').localhost == true)
     ? 'http://localhost:5000/uploadImage'
-    : 'http://localhost:5000/uploadImage';
-    // : 'https://snap1.d.tube/uploadImage';
+    : Session.get('upldr')+'/uploadImage';
+
   var formData = new FormData();
   formData.append('files', file);
   $(progressid).progress({ value: 0, total: 1 })
@@ -213,8 +168,7 @@ Template.upload.uploadImage = function (file, progressid, cb) {
       refreshUploadSnapStatus = setInterval(function () {
         var url = (Session.get('remoteSettings').localhost == true)
           ? 'http://localhost:5000/getProgressByToken/' + result.token
-          : 'http://localhost:5000/getProgressByToken/' + result.token
-          // : 'https://snap1.d.tube/getProgressByToken/' + result.token;
+          : Session.get('upldr')+'/getProgressByToken/' + result.token
 
         $.getJSON(url, function (data) {
           var isCompleteUpload = true

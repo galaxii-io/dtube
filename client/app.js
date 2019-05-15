@@ -20,6 +20,7 @@ Meteor.startup(function(){
   // window.Gun = Gun
   // https://galaxii.io
   Session.set('LIVE_SITE', "http://192.168.0.124:3000")
+  Session.set('upldr', Session.get('remoteSettings').full_upldr)
   Session.set('lastHot', null)
   Session.set('lastTrending', null)
   Session.set('lastCreated', null)
@@ -86,20 +87,6 @@ Meteor.startup(function(){
 
   Market.getSteemPrice()
   Market.getSteemDollarPrice()
-
-  // loading remote settings -- disabled
-  // steem.api.getAccounts(['dtube'], function(err, result) {
-  //   if (!result || !result[0]) return
-  //   var jsonMeta = JSON.parse(result[0].json_metadata)
-  //   if (jsonMeta.remoteSettings) {
-  //     //Session.set('remoteSettings', jsonMeta.remoteSettings)
-  //     if (jsonMeta.remoteSettings.upldr) {
-  //       var rand = jsonMeta.remoteSettings.upldr[Math.floor(Math.random() * jsonMeta.remoteSettings.upldr.length)];
-  //       Session.set('upldr', rand)
-  //     }
-  //   }
-  // });
-
 
   // JS IPFS node
   // $.getScript('js/ipfs.js', function(){
