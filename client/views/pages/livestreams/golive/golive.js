@@ -5,9 +5,12 @@ Template.upload.rendered = function () {
 }
 
 Template.golive.genBody = function (author, permlink, title, snaphash, videohash, description) {
-  var body = '<hr>\n\n'
+  var body = '<center>'
+  body += '<a href=\'https://galaxii.io/#!/v/' + author + '/' + permlink + '\'>'
+  body += '<img src=\'https://ipfs.io/ipfs/' + Session.get('overlayHash') + '\'></a></center><hr>\n\n'
   body += description
   body += '\n\n<hr>'
+  body += '<a href=\'https://galaxii.io/#!/v/' + author + '/' + permlink + '\'> ▶️ Galaxii</a>'
   return body
 }
 
