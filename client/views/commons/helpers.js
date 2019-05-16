@@ -286,7 +286,7 @@ Template.registerHelper('isResteemed', function (array) {
 })
 
 Template.registerHelper('getEmbedCode', function (author, permlink) {
-  var code = '<iframe width="560" height="315" src="//embed.galaxii.io/#!/@@@author@@@/@@@permlink@@@" frameborder="0" allowfullscreen></iframe>'
+  var code = '<iframe width="560" height="315" src="http://embed.galaxii.io/#!/@@@author@@@/@@@permlink@@@" frameborder="0" allowfullscreen></iframe>'
   code = code.replace('@@@author@@@', author)
   code = code.replace('@@@permlink@@@', permlink)
   return code
