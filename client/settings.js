@@ -4,7 +4,7 @@ Meteor.settings.public = {
       "dfees": 2500,
       "loadLimit": 12,
       "displayNodes": [
-        "http://galaxii.io:8080"
+        "https://display1.galaxii.io"
       ],
       "APINodes": [
         "https://api.steemit.com/",
