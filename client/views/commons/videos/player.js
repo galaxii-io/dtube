@@ -5,6 +5,6 @@ Template.player.rendered = function () {
 // change this url if you want to work with your own branch of the player
 Template.player.init = function() {
   $('.ui.embed.player').embed({
-    url: "http://embed.galaxii.io/#!/" + FlowRouter.getParam("author") + "/" + FlowRouter.getParam("permlink") + "/true/true"
+    url: "https://embed.galaxii.io/#!/" + FlowRouter.getParam("author") + "/" + FlowRouter.getParam("permlink") + "/true/true"
   });
 }
