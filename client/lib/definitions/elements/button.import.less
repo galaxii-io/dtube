@@ -2497,9 +2497,9 @@
 /*--- Red ---*/
 .ui.red.buttons .button,
 .ui.red.button {
-  background-color: @red;
-  color: @redTextColor;
-  text-shadow: @redTextShadow;
+  background-color: @blue;
+  color: @blueTextColor;
+  text-shadow: @blueTextShadow;
   background-image: @coloredBackgroundImage;
 }
 .ui.red.button {
@@ -2507,59 +2507,59 @@
 }
 .ui.red.buttons .button:hover,
 .ui.red.button:hover {
-  background-color: @redHover;
-  color: @redTextColor;
-  text-shadow: @redTextShadow;
+  background-color: @blueHover;
+  color: @blueTextColor;
+  text-shadow: @blueTextShadow;
 }
 .ui.red.buttons .button:focus,
 .ui.red.button:focus {
-  background-color: @redFocus;
-  color: @redTextColor;
-  text-shadow: @redTextShadow;
+  background-color: @blueFocus;
+  color: @blueTextColor;
+  text-shadow: @blueTextShadow;
 }
 .ui.red.buttons .button:active,
 .ui.red.button:active {
-  background-color: @redDown;
-  color: @redTextColor;
-  text-shadow: @redTextShadow;
+  background-color: @blueDown;
+  color: @blueTextColor;
+  text-shadow: @blueTextShadow;
 }
 .ui.red.buttons .active.button,
 .ui.red.buttons .active.button:active,
 .ui.red.active.button,
 .ui.red.button .active.button:active {
-  background-color: @redActive;
-  color: @redTextColor;
-  text-shadow: @redTextShadow;
+  background-color: @blueActive;
+  color: @blueTextColor;
+  text-shadow: @blueTextShadow;
 }
 
 /* Basic */
 .ui.basic.red.buttons .button,
 .ui.basic.red.button {
-  box-shadow: 0px 0px 0px @basicBorderSize @red inset !important;
-  color: @red !important;
+  box-shadow: 0px 0px 0px @basicBorderSize @blue inset !important;
+  color: @blue !important;
 }
 .ui.basic.red.buttons .button:hover,
 .ui.basic.red.button:hover {
   background: transparent !important;
-  box-shadow: 0px 0px 0px @basicColoredBorderSize @redHover inset !important;
-  color: @redHover !important;
+  box-shadow: 0px 0px 0px @basicColoredBorderSize @blueHover inset !important;
+  color: @blueHover !important;
 }
 .ui.basic.red.buttons .button:focus,
 .ui.basic.red.button:focus {
   background: transparent !important;
-  box-shadow: 0px 0px 0px @basicColoredBorderSize @redFocus inset !important;
-  color: @redHover !important;
+  box-shadow: 0px 0px 0px @basicColoredBorderSize @blueFocus inset !important;
+  color: @blueHover !important;
 }
 .ui.basic.red.buttons .active.button,
 .ui.basic.red.active.button {
   background: transparent !important;
-  box-shadow: 0px 0px 0px @basicColoredBorderSize @redActive inset !important;
-  color: @redDown !important;
+  box-shadow: 0px 0px 0px @basicColoredBorderSize @blueActive inset !important;
+  color: @blueDown !important;
 }
 .ui.basic.red.buttons .button:active,
 .ui.basic.red.button:active {
-  box-shadow: 0px 0px 0px @basicColoredBorderSize @redDown inset !important;
-  color: @redDown !important;
+  box-shadow: 0px 0px 0px @basicColoredBorderSize @blueDown inset !important;
+  color: @blueDown !important;
 }
 .ui.buttons:not(.vertical) > .basic.red.button:not(:first-child) {
   margin-left: -@basicColoredBorderSize;
@@ -3427,4 +3427,3 @@
 }
 
 .loadUIOverrides();
-
