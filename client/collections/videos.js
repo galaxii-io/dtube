@@ -186,7 +186,7 @@ Videos.getVideosByBlog = function(author, limit, cb) {
 Videos.getVideosBy = function(type, limit, cb) {
   //"dtube",
   var query = {
-    "tag": "rahulsps",
+    "tag": "galaxii",
     "limit": Session.get('remoteSettings').loadLimit,
     "truncate_body": 1
   }

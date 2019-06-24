@@ -52,7 +52,7 @@ Meteor.startup(function(){
   else
     cbUrl = Session.get("LIVE_SITE")+'/#!/sc2login'
   var sc2 = sc2sdk.Initialize({
-    app: 'vershasps',
+    app: 'galaxii',
     callbackURL: cbUrl,
     accessToken: 'access_token',
     scope: ['login','vote','comment','delete_comment','claim_reward_balance','custom_json','comment_options']

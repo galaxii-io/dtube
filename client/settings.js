@@ -20,7 +20,7 @@ Meteor.settings.public = {
       "localhost": true
     },
     "app": "dtube/0.8",
-    "beneficiary": "rahulsps",
+    "beneficiary": "galaxii",
     "pageTitleSeparator": "-",
     "appName": "Galaxii",
     "ipfs": "",
