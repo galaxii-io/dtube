@@ -74,6 +74,10 @@
   background-color: #ff1a1a !important;
 }
 
+.container{
+    font-family: 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
 .nightmode {
   background: #111111!important;
   color: rgb(240, 240, 240)!important;
