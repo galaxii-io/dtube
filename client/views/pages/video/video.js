@@ -71,7 +71,7 @@ Template.video.helpers({
 Template.video.activatePopups = function() {
   $('[data-tcs]').each(function() {
     var $el = $(this);
-    $el.popup({    
+    $el.popup({
       popup: $el.attr('data-tcs'),
       on: 'hover',
       delay: {
@@ -99,8 +99,10 @@ Template.video.events({
     var author = FlowRouter.getParam("author")
     var permlink = FlowRouter.getParam("permlink")
     var weight = UserSettings.get('voteWeight') * -100
+    console.log(author,permlink,weight);
     broadcast.vote(author, permlink, weight, function (err, result) {
-      if (err) toastr.error(err.cause.payload.error.data.stack[0].format, translate('GLOBAL_ERROR_COULD_NOT_VOTE'))
+      console.log(err, result)
+      if (err) toastr.error(err)
       else toastr.success(translate('GLOBAL_ERROR_DOWNVOTE_FOR', weight / 100 + '%', author + '/' + permlink))
       Videos.updateContent(FlowRouter.getParam("author"), FlowRouter.getParam("permlink"))
     });
@@ -145,7 +147,7 @@ Template.video.events({
       following: FlowRouter.getParam("author"),
       what: ['blog']
     })
-    
+
     broadcast.follow(FlowRouter.getParam("author"), function(err, result) {
       // alternative, inutile jusqua preuve du contraire
       // steem.api.getFollowCount(FlowRouter.getParam("author"), function(e,r) {
@@ -274,6 +276,6 @@ Template.video.setScreenMode = function () {
     $('.ui.videocontainer').addClass('computergrid').removeClass('tabletgrid').addClass('grid');
     $('.videocol').removeClass('eleven wide column').addClass('twelve wide column');
     $('.relatedcol').removeClass('five wide column').addClass('four wide column');
-  
+
   }
 }

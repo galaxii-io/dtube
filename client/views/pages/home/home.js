@@ -17,7 +17,21 @@ Template.home.helpers({
     return Videos.find({ source: 'chainByTrending' }, {limit: 25}).fetch()
   },
   feedVideos: function () {
-    return Videos.find({ source: 'chainByFeed-' + Session.get('activeUsername') }).fetch()
+    var flag = 0
+    var legalVideos = []
+    videos = Videos.find({ source: 'chainByFeed-' + Session.get('activeUsername') }).fetch()
+    videos.forEach(function(e){
+      flag = 0
+      e.active_votes.forEach(function(voter){
+        if(voter.voter == "vershasps" && voter.percent < 0){
+          flag = 1
+        }
+      })
+      if (flag == 0){
+        legalVideos.push(e)
+      }
+    })
+    return legalVideos
   }
 })
 
