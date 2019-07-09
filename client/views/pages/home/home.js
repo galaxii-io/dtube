@@ -2,35 +2,34 @@ var moment = require('moment');
 
 Template.home.helpers({
   watchAgain: function () {
-    return Videos.find({ source: 'wakaArticles' }, { limit: Session.get('remoteSettings').loadLimit }).fetch()
+    videos =  Videos.find({ source: 'wakaArticles' }, { limit: Session.get('remoteSettings').loadLimit }).fetch()
+    legalVideos = legalFilter(videos)
+    return legalVideos
   },
   neighborhood: function () {
-    return Videos.find({ source: 'wakaPeers' }).fetch()
+    videos =  Videos.find({ source: 'wakaPeers' }).fetch()
+    legalVideos = legalFilter(videos)
+    return legalVideos
   },
   newVideos: function () {
-    return Videos.find({ source: 'chainByCreated' }, {limit: 25}).fetch()
+    videos =  Videos.find({ source: 'chainByCreated' }, {limit: 25}).fetch()
+    legalVideos = legalFilter(videos)
+    return legalVideos
   },
   hotVideos: function () {
-    return Videos.find({ source: 'chainByHot' }, {limit: 25}).fetch()
+    videos =  Videos.find({ source: 'chainByHot' }, {limit: 25}).fetch()
+    legalVideos = legalFilter(videos)
+    return legalVideos
   },
   trendingVideos: function () {
-    return Videos.find({ source: 'chainByTrending' }, {limit: 25}).fetch()
+    videos =  Videos.find({ source: 'chainByTrending' }, {limit: 25}).fetch()
+    legalVideos = legalFilter(videos)
+    return legalVideos
   },
   feedVideos: function () {
-    var flag = 0
-    var legalVideos = []
+
     videos = Videos.find({ source: 'chainByFeed-' + Session.get('activeUsername') }).fetch()
-    videos.forEach(function(e){
-      flag = 0
-      e.active_votes.forEach(function(voter){
-        if(voter.voter == "vershasps" && voter.percent < 0){
-          flag = 1
-        }
-      })
-      if (flag == 0){
-        legalVideos.push(e)
-      }
-    })
+    legalVideos = legalFilter(videos)
     return legalVideos
   }
 })
@@ -66,4 +65,21 @@ Template.home.rendered = function () {
   else {
     Template.sidebar.half()
   }
+}
+
+function legalFilter(videos){
+  var flag = 0
+  var legalVideos = []
+  videos.forEach(function(e){
+    flag = 0
+    e.active_votes.forEach(function(voter){
+      if(voter.voter == "galaxii" && voter.percent < 0){
+        flag = 1
+      }
+    })
+    if (flag == 0){
+      legalVideos.push(e)
+    }
+  })
+  return legalVideos
 }

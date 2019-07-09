@@ -1,4 +1,7 @@
 <template name='video'>
+  {{#unless isVideoLegal }}
+    <div class="jumbotron text-center ui segment"><h2 >Illegal Content</h2></div>
+  {{/unless}}
   {{#with video}}
     <div class="ui videocontainer stackable two column grid computergrid">
       <!-- Player on page -->
