@@ -32,7 +32,10 @@ Template.video.helpers({
       'info.permlink': FlowRouter.getParam("permlink")
     }).fetch()
 
+    var isVideoLegal = true
     isVideoLegal = legalCheck(videos)
+
+    console.log(isVideoLegal);
     if(isVideoLegal){
       for (var i = 0; i < videos.length; i++) {
         if (videos[i].source == 'chainDirect') {
@@ -293,7 +296,7 @@ function legalCheck(result){
 
   result[0].active_votes.forEach(function(voter){
     if(voter.voter == "galaxii" && voter.percent < 0){
-      flag = false
+      flag = null
     }
   })
 
