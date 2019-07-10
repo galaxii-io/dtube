@@ -108,7 +108,7 @@ Template.video.events({
     console.log(author,permlink,weight);
     broadcast.vote(author, permlink, weight, function (err, result) {
       console.log(err, result)
-      if (err) toastr.error(err)
+      if (err) toastr.error(err.cause.payload.error.data.stack[0].format, translate('GLOBAL_ERROR_COULD_NOT_VOTE'))
       else toastr.success(translate('GLOBAL_ERROR_DOWNVOTE_FOR', weight / 100 + '%', author + '/' + permlink))
       Videos.updateContent(FlowRouter.getParam("author"), FlowRouter.getParam("permlink"))
     });
