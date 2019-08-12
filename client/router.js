@@ -36,6 +36,20 @@ FlowRouter.route('/upload', {
   }
 });
 
+FlowRouter.route('/about', {
+  name: "about",
+  action: function(params, queryParams) {
+    Session.set("currentMenu", 3)
+    Template.sidebar.selectMenu();
+    Session.set("pageTitle", 'about')
+    Template.sidebar.selectMenu();
+    BlazeLayout.render('masterLayout', {
+      main: "about",
+      nav: "nav",
+    });
+  }
+});
+
 FlowRouter.route('/golive', {
   name: "golive",
   action: function(params, queryParams) {

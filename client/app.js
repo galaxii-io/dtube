@@ -37,11 +37,14 @@ Meteor.startup(function(){
       FlowRouter.initialize({hashbang: true}, function() {
         console.log('Router initialized')
       });
+
       // handle manual fragment change
       $(window).on('hashchange', function() {
         FlowRouter.go(window.location.hash)
       });
+
     })
+
   })
 
 
@@ -51,6 +54,9 @@ Meteor.startup(function(){
     cbUrl = 'http://localhost:3000/#!/sc2login'
   else
     cbUrl = Session.get("LIVE_SITE")+'/#!/sc2login'
+
+
+
   var sc2 = sc2sdk.Initialize({
     app: 'galaxii',
     callbackURL: cbUrl,
@@ -79,8 +85,9 @@ Meteor.startup(function(){
 
   if (Session.get('remoteSettings').warning)
     toastr.warning(Session.get('remoteSettings').warning, translate('WARNING_TITLE'))
-
+  console.log('Loaded languages')
   steem.api.getDynamicGlobalProperties(function(err, result) {
+
     if (result)
     Session.set('steemGlobalProp', result)
   })
