@@ -7,6 +7,7 @@
       </div>
       <div class="ui indicating progress" id="progresssnap" style="display:none">
         <div class="bar"></div>
+
         <div class="label">{{ translate 'UPLOAD_UPLOADING_SNAP'}}</div>
       </div>
       {{> uploadvideoprogress}}
@@ -31,12 +32,12 @@
           </div>
           {{#if isOnMobile}}
             <div class="ui centered grid" style="text-align:right; margin-top:20px; margin-bottom:20px;">
-                <!-- <a class='ui icon right labeled dtube grey button needsclick' id='snap' download='snap.jpg' style="margin:1rem!important;width: 100%;">
+                <a class='ui icon right labeled dtube grey button needsclick' id='snap' download='snap.jpg' style="margin:1rem!important;width: 100%;">
                   <div style="display:inline-block;padding: 0.8em 1em;" class="needsclick">
                     {{ translate 'UPLOAD_TAKE_SNAP'}}
                   </div>
                   <i class="photo icon black" style="background: white;opacity: 1;"></i>
-                </a> -->
+                </a>
                 <label for="snapFile" style="width:100%;">
                   <a class="ui red fluid dtube icon right labeled button needsclick" id="uploadSnap">
                     <div style="display:inline-block; padding:0.8em 1em;" class="needsclick">

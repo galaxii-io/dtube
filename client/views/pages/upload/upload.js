@@ -63,9 +63,10 @@ Template.upload.genBody = function (author, permlink, title, snaphash, videohash
     return Template.upload.genBodyLivestream(author, permlink, title, snaphash, description)
   else {
     var body = '<hr>\n\n'
+    body += '<img src=\'https://display1.galaxii.io/ipfs/' + Session.get('overlayHash') + '\'></a></center><hr>\n\n'
     body += description
     body += '\n\n<hr>'
-    body += '<a href=\'https://display1.galaxii.io/ipfs/' + videohash + '\'> ▶️ Galaxii</a>'
+    body += '<a href=\'https://galaxii.io/#!/v/' + author + '/' + permlink + '\'> ▶️ Galaxii</a><br />'
 
     return body
   }
@@ -74,7 +75,7 @@ Template.upload.genBody = function (author, permlink, title, snaphash, videohash
 Template.upload.genBodyLivestream = function (author, permlink, title, snaphash, description) {
   var body = '<center>'
   body += '<a href=\'https://galaxii.io/#!/v/' + author + '/' + permlink + '\'>'
-  body += '<img src=\'https://ipfs.io/ipfs/' + Session.get('overlayHash') + '\'></a></center><hr>\n\n'
+  body += '<img src=\'https://display1.galaxii.io/ipfs/' + Session.get('overlayHash') + '\'></a></center><hr>\n\n'
   body += description
   body += '\n\n<hr>'
   body += '<a href=\'https://galaxii.io/#!/v/' + author + '/' + permlink + '\'> ▶️ Galaxii</a><br />'

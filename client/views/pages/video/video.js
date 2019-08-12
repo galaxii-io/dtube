@@ -26,29 +26,38 @@ Template.video.helpers({
     return ChainUsers.findOne({ name: FlowRouter.getParam("author") })
   },
   video: function () {
+
     var videos = Videos.find({
       'info.author': FlowRouter.getParam("author"),
       'info.permlink': FlowRouter.getParam("permlink")
     }).fetch()
-    for (var i = 0; i < videos.length; i++) {
-      if (videos[i].source == 'chainDirect') {
-        Session.set("pageTitle", videos[i].info.title)
-        return videos[i]
+
+    var isVideoLegal = true
+    isVideoLegal = legalCheck(videos)
+
+    console.log(isVideoLegal);
+    if(isVideoLegal){
+      for (var i = 0; i < videos.length; i++) {
+        if (videos[i].source == 'chainDirect') {
+          Session.set("pageTitle", videos[i].info.title)
+          return videos[i]
+        }
       }
+
+      for (var i = 0; i < videos.length; i++) {
+        if (videos[i].source == 'chainByBlog') return videos[i]
+        if (videos[i].source == 'chainByHot') return videos[i]
+        if (videos[i].source == 'chainByCreated') return videos[i]
+        if (videos[i].source == 'chainByTrending') return videos[i]
+      }
+
+      for (var i = 0; i < videos.length; i++) {
+        if (videos[i].source == 'wakaArticles') return videos[i]
+      }
+      if (videos && videos[0]) return videos[0]
+      return;
     }
 
-    for (var i = 0; i < videos.length; i++) {
-      if (videos[i].source == 'chainByBlog') return videos[i]
-      if (videos[i].source == 'chainByHot') return videos[i]
-      if (videos[i].source == 'chainByCreated') return videos[i]
-      if (videos[i].source == 'chainByTrending') return videos[i]
-    }
-
-    for (var i = 0; i < videos.length; i++) {
-      if (videos[i].source == 'wakaArticles') return videos[i]
-    }
-    if (videos && videos[0]) return videos[0]
-    return;
   },
   localIpfs: function () {
     return Session.get('localIpfs')
@@ -71,7 +80,7 @@ Template.video.helpers({
 Template.video.activatePopups = function() {
   $('[data-tcs]').each(function() {
     var $el = $(this);
-    $el.popup({    
+    $el.popup({
       popup: $el.attr('data-tcs'),
       on: 'hover',
       delay: {
@@ -99,7 +108,9 @@ Template.video.events({
     var author = FlowRouter.getParam("author")
     var permlink = FlowRouter.getParam("permlink")
     var weight = UserSettings.get('voteWeight') * -100
+    console.log(author,permlink,weight);
     broadcast.vote(author, permlink, weight, function (err, result) {
+      console.log(err, result)
       if (err) toastr.error(err.cause.payload.error.data.stack[0].format, translate('GLOBAL_ERROR_COULD_NOT_VOTE'))
       else toastr.success(translate('GLOBAL_ERROR_DOWNVOTE_FOR', weight / 100 + '%', author + '/' + permlink))
       Videos.updateContent(FlowRouter.getParam("author"), FlowRouter.getParam("permlink"))
@@ -145,7 +156,7 @@ Template.video.events({
       following: FlowRouter.getParam("author"),
       what: ['blog']
     })
-    
+
     broadcast.follow(FlowRouter.getParam("author"), function(err, result) {
       // alternative, inutile jusqua preuve du contraire
       // steem.api.getFollowCount(FlowRouter.getParam("author"), function(e,r) {
@@ -209,41 +220,42 @@ Template.video.loadState = function () {
   steem.api.getState('/dtube/@' + FlowRouter.getParam("author") + '/' + FlowRouter.getParam("permlink"), function (err, result) {
     if (err) throw err;
     console.log('Loaded video from chain', result)
-    isLoadingState = false
-    for (var key in result.accounts) {
-      var user = result.accounts[key]
-      try {
-        user.json_metadata = JSON.parse(user.json_metadata)
-      } catch (e) {
+      isLoadingState = false
+      for (var key in result.accounts) {
+        var user = result.accounts[key]
+        try {
+          user.json_metadata = JSON.parse(user.json_metadata)
+        } catch (e) {
+        }
+        ChainUsers.upsert({ _id: user.id }, Waka.api.DeleteFieldsWithDots(user));
       }
-      ChainUsers.upsert({ _id: user.id }, Waka.api.DeleteFieldsWithDots(user));
-    }
-    var video = Videos.parseFromChain(result.content[FlowRouter.getParam("author") + '/' + FlowRouter.getParam("permlink")])
-    // non dtube videos can only load from State
-    if (!video && !result.content[FlowRouter.getParam("author") + '/' + FlowRouter.getParam("permlink")]) {
-      setTimeout(function(){
-        Videos.getContent(FlowRouter.getParam("author"), FlowRouter.getParam("permlink"))
-      }, 1500);
-    } else if (!video) {
-      video = result.content[FlowRouter.getParam("author") + '/' + FlowRouter.getParam("permlink")]
-      video.info = {
-        author: FlowRouter.getParam("author"),
-        permlink: FlowRouter.getParam("permlink"),
-        title: video.title
+      var video = Videos.parseFromChain(result.content[FlowRouter.getParam("author") + '/' + FlowRouter.getParam("permlink")])
+      // non dtube videos can only load from State
+      if (!video && !result.content[FlowRouter.getParam("author") + '/' + FlowRouter.getParam("permlink")]) {
+        setTimeout(function(){
+          Videos.getContent(FlowRouter.getParam("author"), FlowRouter.getParam("permlink"))
+        }, 1500);
+      } else if (!video) {
+        video = result.content[FlowRouter.getParam("author") + '/' + FlowRouter.getParam("permlink")]
+        video.info = {
+          author: FlowRouter.getParam("author"),
+          permlink: FlowRouter.getParam("permlink"),
+          title: video.title
+        }
+        video.content = {
+          description: video.body
+        }
       }
-      video.content = {
-        description: video.body
-      }
-    }
-    Session.set('videoDescription', video.content.description)
-    video.comments = Videos.commentsTree(result.content, FlowRouter.getParam("author"), FlowRouter.getParam("permlink"))
-    video.source = 'chainDirect'
-    video._id += 'd'
-    Videos.upsert({ _id: video._id }, video)
-    Waka.api.Set({ info: video.info, content: video.content }, {}, function (e, r) {
-      Videos.refreshWaka()
-    })
-  });
+      Session.set('videoDescription', video.content.description)
+      video.comments = Videos.commentsTree(result.content, FlowRouter.getParam("author"), FlowRouter.getParam("permlink"))
+      video.source = 'chainDirect'
+      video._id += 'd'
+      Videos.upsert({ _id: video._id }, video)
+      Waka.api.Set({ info: video.info, content: video.content }, {}, function (e, r) {
+        Videos.refreshWaka()
+      })
+
+    });
 }
 
 // Template.video.pinFile = function (author, permlink, cb) {
@@ -274,6 +286,19 @@ Template.video.setScreenMode = function () {
     $('.ui.videocontainer').addClass('computergrid').removeClass('tabletgrid').addClass('grid');
     $('.videocol').removeClass('eleven wide column').addClass('twelve wide column');
     $('.relatedcol').removeClass('five wide column').addClass('four wide column');
-  
+
   }
+}
+
+
+function legalCheck(result){
+  var flag = true ;
+
+  result[0].active_votes.forEach(function(voter){
+    if(voter.voter == "galaxii" && voter.percent < 0){
+      flag = null
+    }
+  })
+
+  return flag
 }

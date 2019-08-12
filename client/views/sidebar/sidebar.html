@@ -14,12 +14,12 @@
             <span class="dtubesidebartitle">{{ translate 'SIDEBAR_MY_CHANNEL'}}</span>
           </div>
         </a>
-        <a href='/dtalk' class="item pdg-non">
+        <!-- <a href='/dtalk' class="item pdg-non">
           <div id="dtalksidebarmenu" class="menuitem dtubesidebarmenu dsp-inh pdg-non">
             <i class="comment icon dtubesidebaricon"></i>
             <span class="dtubesidebartitle">{{ translate 'SIDEBAR_DTALK'}}</span>
           </div>
-        </a>
+        </a> -->
         <a href='/upload' class="item pdg-non">
           <div id="uploadsidebarmenu" class="menuitem dtubesidebarmenu dsp-inh pdg-non">
             <i class="cloud upload icon dtubesidebaricon"></i>
@@ -94,43 +94,45 @@
     <div class="ui divider"></div>
     <a class="item pdg-non wid-ful" style="margin-bottom: 50px;">
       <div class="menuitem dtubesidebarmenu mobilesidebarlinks" style="font-weight: 600;font-size: 13px;line-height: 1.5em;display: grid;">
-        <a href='https://about.d.tube' target="_blank" id="about">
+        <!-- <a href='https://about.d.tube' target="_blank" id="about">
           <span class="sidebarlink">{{ translate 'SIDEBAR_ABOUT'}}</span>
         </a>
         <a href='https://about.d.tube/#faq1' target="_blank" id="help">
           <span class="sidebarlink">{{ translate 'SIDEBAR_HELP'}}</span>
-        </a>
-        <a href='https://github.com/dtube' target="_blank" id="github">
+        </a> -->
+        <a href='/about' target="_blank" id="help">
+          <span class="sidebarlink">{{ translate 'SIDEBAR_ABOUT'}}</span>
+        </a>-
+        <a href='https://github.com/galaxii-io' target="_blank" id="github">
           <span class="sidebarlink">{{ translate 'SIDEBAR_GITHUB'}}</span>
         </a>
-        <a href='https://steemit.com/@dtube' target="_blank" id="steemit">
+        <a href='https://steemit.com/@galaxii' target="_blank" id="steemit">
           <span class="sidebarlink">{{ translate 'SIDEBAR_STEEM'}}</span>
         </a>
-        <a href='https://discord.gg/RqeQQjf' target="_blank" id="discord">
+        <!-- <a href='https://discord.gg/RqeQQjf' target="_blank" id="discord">
           <span class="sidebarlink">{{ translate 'SIDEBAR_DISCORD'}}</span>
-        </a>
+        </a> -->
       </div>
       <div class="mobilesidebarspacer"></div>
     </a>
     {{else}}
     <div class="ui divider"></div>
-    <div class="sidebarlink" style="color: red; padding: 10px 10px 70px 10px;font-weight: 600;font-size: 14px;line-height: 1.5em;">
-      <a href='https://about.d.tube' target="_blank" id="about">
+    <div class="sidebarlink" style="color: #1a5099; padding: 10px 10px 70px 10px;font-weight: 600;font-size: 14px;line-height: 1.5em;">
+      <!-- <a href='https://about.d.tube' target="_blank" id="about">
+        <span class="sidebarlink">{{ translate 'SIDEBAR_ABOUT'}}</span>
+      </a>- -->
+      <a href='/about' target="_blank" id="help">
         <span class="sidebarlink">{{ translate 'SIDEBAR_ABOUT'}}</span>
       </a>-
-      <a href='https://about.d.tube/#faq1' target="_blank" id="help">
-        <span class="sidebarlink">{{ translate 'SIDEBAR_HELP'}}</span>
-      </a>-
-      <a href='https://github.com/dtube' target="_blank" id="github">
+      <a href='https://github.com/galaxii-io' target="_blank" id="github">
         <span class="sidebarlink">{{ translate 'SIDEBAR_GITHUB'}}</span>
-      </a>
-      <br>
-      <a href='https://steemit.com/@dtube' target="_blank" id="steemit">
-        <span class="sidebarlink">{{ translate 'SIDEBAR_STEEM'}}</span>
       </a>-
-      <a href='https://discord.gg/dtube' target="_blank" id="discord">
-        <span class="sidebarlink">{{ translate 'SIDEBAR_DISCORD'}}</span>
+      <a href='https://steemit.com/@galaxii' target="_blank" id="steemit">
+        <span class="sidebarlink">{{ translate 'SIDEBAR_STEEM'}}</span>
       </a>
+      <!-- <a href='https://discord.gg/dtube' target="_blank" id="discord">
+        <span class="sidebarlink">{{ translate 'SIDEBAR_DISCORD'}}</span>
+      </a> -->
     </div>
     {{/if}}
   </div>
