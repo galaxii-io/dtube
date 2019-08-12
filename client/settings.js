@@ -19,7 +19,7 @@ Meteor.settings.public = {
       "full_upldr": "https://upload1.galaxii.io",
       "localhost": true
     },
-    "app": "dtube/0.8",
+    "app": "galaxii/1.0",
     "beneficiary": "galaxii",
     "pageTitleSeparator": "-",
     "appName": "Galaxii",
